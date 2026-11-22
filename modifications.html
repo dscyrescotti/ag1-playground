@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AG1 · Modifications</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+body{margin:0}
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1d1d1b;--muted:#6b6b66;--line:#dcdad2;--soft:#efeee8;--acc:#1f6f8b;--accsoft:#e3eff3;--hl:#d99a00}
+@media(prefers-color-scheme:dark){:root{--bg:#17181a;--card:#212326;--ink:#ecebe6;--muted:#a09f99;--line:#3c3e42;--soft:#2a2c30;--acc:#58b5d3;--accsoft:#1d3540;--hl:#ffd24a}
+ .bfsmod .problem{color:var(--ink)!important}.bfsmod .lead{color:var(--muted)!important}}
+.bfsmod { font: 15.5px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+.bfsmod .wrap { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; max-width: 1240px; margin: 0 auto; padding: 28px 20px 80px; }
+.bfsmod nav.toc { position: sticky; top: 20px; align-self: start; font-size: 14px; max-height: calc(100vh - 40px); overflow: auto; }
+.bfsmod nav.toc a.top { border: 1px solid var(--line); border-radius: 6px; text-align: center; color: var(--ink); margin-bottom: 6px; padding: 7px 10px; }
+.bfsmod nav.toc a.top.cur { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.bfsmod nav.toc a { display: block; padding: 5px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; }
+.bfsmod nav.toc a:not(.top):hover, .bfsmod nav.toc a.on { background: var(--accsoft); color: var(--acc); }
+.bfsmod nav.toc .grp { margin: 14px 0 4px 10px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #94a3b8; }
+.bfsmod .hero h1 { font-size: 34px; line-height: 1.15; margin: 4px 0 10px; letter-spacing: -.02em; }
+.bfsmod .eyebrow { color: var(--acc); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; margin: 0; }
+.bfsmod .lead { font-size: 18px; color: #334155; max-width: 70ch; }
+.bfsmod .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px 26px; margin: 22px 0; scroll-margin-top: 16px; }
+.bfsmod h2 { font-size: 22px; margin: 0 0 10px; letter-spacing: -.01em; }
+.bfsmod h3 { font-size: 15px; margin: 0 0 6px; }
+.bfsmod h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 0 0 4px; }
+.bfsmod .recipe li { margin: 6px 0; }
+.bfsmod .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
+.bfsmod .box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font-size: 15px; }
+.bfsmod .box p, .bfsmod .box ul { margin: 6px 0; }
+.bfsmod .howto { background: var(--accsoft); border-radius: 10px; padding: 10px 14px; font-size: 15px; }
+.bfsmod .ex-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+.bfsmod .ex-head h2 { margin: 0; flex: 1; }
+.bfsmod .num { width: 34px; height: 34px; border-radius: 10px; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-weight: 700; flex: none; }
+.bfsmod .tag { font-size: 12px; color: var(--acc); background: var(--accsoft); padding: 3px 10px; border-radius: 99px; white-space: nowrap; }
+.bfsmod .problem { border-left: 3px solid var(--acc); padding: 4px 0 4px 14px; color: #1e293b; }
+.bfsmod .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 14px 0; }
+.bfsmod .facts > div { background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+.bfsmod .facts p { margin: 0; }
+.bfsmod .demo { margin-top: 16px; border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: #fbfaf7; color: #1d1d1b; --ink:#1d1d1b; --muted:#6b6b66; --line:#e4e2da; --accsoft:#e3eff3; --acc:#1f6f8b; }
+.bfsmod .bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.bfsmod button { color: #1d1d1b; font: inherit; font-size: 14px; padding: 6px 14px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer; }
+.bfsmod button:hover { border-color: var(--acc); }
+.bfsmod button.primary { background: var(--acc); color: #fff; border-color: var(--acc); }
+.bfsmod .hint { color: var(--muted); font-size: 13px; margin-left: auto; }
+.bfsmod .kin input, .bfsmod .jugbar input { width: 58px; font: inherit; padding: 4px 6px; border: 1px solid #cbd5e1; border-radius: 6px; }
+.bfsmod .jugbar label { font-size: 15px; }
+.bfsmod .panes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.bfsmod .pane { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px; min-width: 0; }
+.bfsmod .pane-t { font-size: 13px; font-weight: 600; padding: 2px 6px 6px; }
+.bfsmod .muted { color: var(--muted); font-weight: 400; }
+.bfsmod .gsvg { width: 100%; height: auto; display: block; }
+.bfsmod .gsvg text { font-family: inherit; text-anchor: middle; pointer-events: none; }
+.bfsmod .vlab { font-size: 15px; font-weight: 600; fill: var(--ink); }
+.bfsmod .vlab.small { font-size: 12px; }
+.bfsmod .hlab { font-size: 10px; font-weight: 600; fill: var(--ink); }
+.bfsmod .dlab { font-size: 10px; font-weight: 700; fill: #b45309; text-anchor: start !important; }
+.bfsmod .dlab.big { font-size: 14px; }
+.bfsmod .badge { font-size: 10px; fill: #fff; font-weight: 600; }
+.bfsmod .stepno { font-size: 10px; fill: #fff; font-weight: 700; }
+.bfsmod .ltitle { font-size: 11px; fill: var(--muted); text-anchor: start !important; font-weight: 600; }
+.bfsmod .layer { fill: #f8fafc; stroke: #e2e8f0; }
+.bfsmod .layer.acc { fill: #f0fdf4; stroke: #bbf7d0; }
+.bfsmod .hit { cursor: pointer; }
+.bfsmod .hit:hover { stroke: rgba(79, 70, 229, .15); }
+.bfsmod .vclick { cursor: pointer; }
+.bfsmod .vclick:hover circle { stroke: var(--acc); }
+.bfsmod .status { font-size: 14px; margin-top: 10px; padding: 8px 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; min-height: 40px; }
+.bfsmod .queue { color: var(--muted); margin-top: 2px; }
+.bfsmod .answer { font-size: 14px; padding: 8px 8px 4px; }
+.bfsmod .seq { margin-top: 4px; font-size: 15px; line-height: 1.9; }
+.bfsmod .arr { font-weight: 800; }
+.bfsmod .hn { font-weight: 600; }
+.bfsmod .hn sub, .bfsmod .hn sup { font-size: 70%; font-weight: 500; color: #475569; }
+.bfsmod .good { color: #15803d; } .bfsmod .bad { color: #b91c1c; }
+.bfsmod .pill { font-size: 12px; padding: 2px 8px; border-radius: 99px; margin-left: 6px; }
+.bfsmod .pill.ok { background: #dcfce7; color: #166534; } .bfsmod .pill.warn { background: #fef3c7; color: #92400e; }
+.bfsmod .jt { border-collapse: collapse; font-size: 14px; margin-top: 6px; }
+.bfsmod .jt td, .bfsmod .jt th { padding: 4px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+.bfsmod .jug { display: inline-flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; width: 26px; height: 30px; border: 1.5px solid #94a3b8; border-top: none; border-radius: 0 0 5px 5px; margin-right: 6px; overflow: hidden; vertical-align: middle; }
+.bfsmod .fillbar { position: absolute; left: 0; right: 0; bottom: 0; background: #93c5fd; }
+.bfsmod .jug b { position: relative; font-size: 11px; }
+.bfsmod .katex-display { margin: .6em 0; }
+@media (max-width: 1000px) {
+  .bfsmod .wrap { grid-template-columns: 1fr; } .bfsmod nav.toc { display: none; }
+  .bfsmod .panes, .bfsmod .grid2 { grid-template-columns: 1fr; } .bfsmod .facts { grid-template-columns: 1fr 1fr; }
+}
+</style></head><body class="bfsmod"><div class="wrap">
+<nav class="toc"><a class="top" href="graph.html">Graph theory</a><a class="top" href="algorithms.html">Algorithms &amp; data structures</a><a class="top cur" href="modifications.html">Modifications</a>
+<div class="grp">BFS · layered graphs</div><a href="#recipe"><b>The recipe</b></a><div class="grp">Edge colours</div>
+<a href="#ex1">1 · Blue before red</a><a href="#ex2">2 · ≤ 1 red</a><a href="#ex3">3 · Exactly 3 red</a><a href="#ex4">4 · Even blue</a><a href="#ex5">5 · Even blue + 3 red</a><a href="#ex6">6 · Alternating</a>
+<div class="grp">Vertex conditions</div><a href="#ex7">7 · ≤ k costly</a><a href="#ex8">8 · Keys &amp; doors</a><a href="#ex9">9 · ℓ key types</a>
+<div class="grp">Other modifications</div><a href="#ex10">10 · Fewest red</a><a href="#ex11">11 · Water jugs</a></nav>
+<main>
+<header class="hero">
+  <p class="eyebrow">Modifications · BFS</p>
+  <h1>BFS modifications: the layered-graph method</h1>
+  <p class="lead">Don't change BFS — change the graph. Build a new directed graph $H$ whose vertices are pairs (original vertex, what you need to remember), run the lecture BFS on $H$ unchanged, and read the answer back in $G$. Every example from Tutorial: <em>BFS modifications</em> below, each with a demo you can edit and step through.</p>
+</header>
+
+<section id="recipe" class="card">
+  <h2>The recipe</h2>
+  <ol class="recipe">
+    <li><b>Describe a valid solution as a sequence.</b> Write the walk as the word of its edge colours (e.g. $BBRBR$) or of the vertex types it visits. The condition becomes "the word belongs to a language $L$".</li>
+    <li><b>Find the state.</b> Ask: <em>what is the least I must remember about the prefix so far to decide how it may continue?</em> Number of red edges so far, parity, the phase, the set of keys collected… That finite set $Q$ is the set of states of an automaton for $L$.</li>
+    <li><b>Build the layers.</b> One copy of $V$ for each state: $V(H) = V \times Q$. Write $v_q$ for the copy of $v$ in layer $q$.</li>
+    <li><b>Build the edges.</b> For every edge $\{u,v\}$ of colour $c$ and every state $q$, add the <em>directed</em> edge $(u_q, v_{\delta(q,c)})$ — and also $(v_q, u_{\delta(q,c)})$, since $G$ is undirected. If the move is forbidden ($\delta$ undefined, the "garbage state"), add nothing.</li>
+    <li><b>Source and target.</b> Start at $s_{q_0}$. If several states are accepting, add a new vertex $t^\ast$ with edges $(t_q, t^\ast)$ for every accepting $q$ (the answer is then $\operatorname{dist}_H - 1$), or just take the minimum over the accepting copies.</li>
+    <li><b>Run plain BFS</b> on $H$ from $s_{q_0}$. Project the path back to $G$ by dropping the subscripts.</li>
+    <li><b>Prove it</b> with the three standard claims (below), then state the complexity.</li>
+  </ol>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>Proof template</h3>
+      <p><b>Claim 1 ($G \Rightarrow H$).</b> Each valid $s$-$t$-walk of length $k$ in $G$ gives an $s_{q_0}$-$t_{q_f}$-walk of length $k$ in $H$: follow the automaton along the walk, and every step is an edge of $H$ by construction.</p>
+      <p><b>Claim 2 ($H \Rightarrow G$).</b> Each $s_{q_0}$-$t_{q_f}$-path in $H$ projects to a walk of the same length in $G$. It is valid because the layer index encodes the state exactly, and only accepting layers contain the target.</p>
+      <p><b>Claim 3 (shortest ↔ shortest).</b> If the BFS path had length $k$ but a valid walk of length $k' &lt; k$ existed, Claim 1 would give a walk in $H$ of length $k'$, which contains a path of length at most $k'$ — contradiction with BFS optimality.</p>
+    </div>
+    <div class="box">
+      <h3>Path or walk?</h3>
+      <p>The projection of a path in $H$ may <b>repeat vertices of $G$</b> (it visits $v_0$ and later $v_2$, say). Whether that matters depends on the condition:</p>
+      <ul>
+        <li><b>Monotone conditions</b> — "at most one red", "blue before red", "at most $k$ costly". Cutting out a cycle never breaks validity, so a shortest valid walk is automatically a path. You may ask for a <em>path</em>.</li>
+        <li><b>Exact counts / parity</b> — "exactly three red", "an even number of blue". Cutting a cycle may remove a red edge or flip a parity, and a valid path might not exist at all. The problem must ask for a <em>walk</em>.</li>
+      </ul>
+      <h3>Complexity</h3>
+      <p>$|V(H)| = |Q|\cdot|V|$ and $|E(H)| \le 2|Q|\cdot|E|$, so BFS on $H$ runs in $\mathcal{O}\big(|Q|\,(|V|+|E|)\big)$. Combining two conditions = product of automata: $|Q| = |Q_1|\cdot|Q_2|$.</p>
+    </div>
+  </div>
+  <p class="howto">In every demo, <b>click an edge</b> to swap its colour (or <b>click a vertex</b> to change its type), then press <b>Step</b> to watch BFS run on $H$. The highlighted path in $H$ is projected back onto $G$ underneath.</p>
+</section>
+
+<!-- ============================ EX 1 ============================ -->
+<section id="ex1" class="card ex">
+  <div class="ex-head"><span class="num">1</span><h2>Blue edges before red edges</h2><span class="tag">path · 2 layers</span></div>
+  <p class="problem">$G=(V,E)$ is connected and undirected, $E = E_B \mathbin{\dot\cup} E_R$. Find a shortest $s$-$t$-path in which all blue edges come before all red edges.</p>
+  <div class="facts">
+    <div><h4>State</h4><p>Which phase are we in: still blue ($B$), or already red ($R$)?</p></div>
+    <div><h4>Layers</h4><p>$v^B$ and $v^R$ for every $v \in V$.</p></div>
+    <div><h4>Edges of $H$</h4><p>$\{u,v\} \in E_B$: $(u^B, v^B)$.<br>$\{u,v\} \in E_R$: $(u^B, v^R)$ and $(u^R, v^R)$.<br>No edge goes from layer $R$ back to $B$.</p></div>
+    <div><h4>Source → target</h4><p>$s^B \to t^\ast$, with $(t^B,t^\ast), (t^R,t^\ast)$. Answer $= \operatorname{dist}_H(s^B,t^\ast) - 1$.</p></div>
+  </div>
+  <p><b>Why only from $s^B$?</b> An all-red solution starting with $\{s,w\}$ is also found via the cross edge $(s^B, w^R)$, so we never need to start in $s^R$.</p>
+  <p><b>Path, not just walk.</b> If the projected walk revisits a vertex, it is the blue part $P$ and the red part $Q$ meeting at some $w$; go along $P$ to the first such $w$ and then along $Q$. This is shorter and still valid, so a shortest valid walk is a path.</p>
+  <p><b>Alternative without layers:</b> BFS on $(V,E_B)$ from $s$ and on $(V,E_R)$ from $t$, then minimise $d_B(s,v) + d_R(v,t)$ over $v$. <b>Time:</b> $\mathcal{O}(|V|+|E|)$.</p>
+  <div class="demo" data-ex="ex1" data-red="sb,ac,bc,cd,dt"></div>
+</section>
+
+<!-- ============================ EX 2 ============================ -->
+<section id="ex2" class="card ex">
+  <div class="ex-head"><span class="num">2</span><h2>At most one red edge</h2><span class="tag">path · 2 layers</span></div>
+  <p class="problem">Find a shortest $s$-$t$-path using at most one red edge.</p>
+  <div class="facts">
+    <div><h4>State</h4><p>How many red edges have been used: $0$ or $1$.</p></div>
+    <div><h4>Layers</h4><p>$v_0, v_1$ for every $v \in V$.</p></div>
+    <div><h4>Edges of $H$</h4><p>$\{u,v\}\in E_B$: $(u_0,v_0)$ and $(u_1,v_1)$.<br>$\{u,v\}\in E_R$: $(u_0, v_1)$ only.<br>A second red edge would need $(u_1, v_2)$, which doesn't exist.</p></div>
+    <div><h4>Source → target</h4><p>$s_0 \to t^\ast$ via $(t_0,t^\ast),(t_1,t^\ast)$.</p></div>
+  </div>
+  <p><b>Path.</b> "At most one" is monotone: cutting a cycle out of a valid walk leaves at most one red edge, so a shortest valid walk is a path.</p>
+  <p><b>Alternative:</b> BFS on blue edges from $s$ and from $t$, then
+  $$q = 1 + \min_{\{u,v\}\in E_R} \big(d_B(s,u) + d_B(v,t)\big),\qquad \text{answer} = \min\{q,\ d_B(s,t)\}.$$
+  (Try both orientations of each red edge.) <b>Time:</b> $\mathcal{O}(|V|+|E|)$.</p>
+  <div class="demo" data-ex="ex2" data-red="sa,sb,ac,bc,be,dt,ct"></div>
+</section>
+
+<!-- ============================ EX 3 ============================ -->
+<section id="ex3" class="card ex">
+  <div class="ex-head"><span class="num">3</span><h2>Exactly three red edges</h2><span class="tag">walk · 4 layers</span></div>
+  <p class="problem">Find a shortest $s$-$t$-<b>walk</b> using exactly three red edges.</p>
+  <div class="facts">
+    <div><h4>State</h4><p>Red edges so far: $i \in \{0,1,2,3\}$.</p></div>
+    <div><h4>Layers</h4><p>$v_0, v_1, v_2, v_3$.</p></div>
+    <div><h4>Edges of $H$</h4><p>$\{u,v\}\in E_B$: $(u_i,v_i)$ for $i=0,\dots,3$.<br>$\{u,v\}\in E_R$: $(u_i, v_{i+1})$ for $i=0,1,2$.</p></div>
+    <div><h4>Source → target</h4><p>$s_0 \to t_3$ — a single target, so no $t^\ast$ is needed.</p></div>
+  </div>
+  <p><b>Why a walk?</b> Cutting a cycle could delete a red edge and destroy validity, and maybe no valid path exists at all. In the default demo the answer goes through $a$ twice — once in layer 0 and once in layer 2 — which is a path in $H$ but not in $G$.</p>
+  <p><b>Correctness, shortest part.</b> In a shortest valid walk $S$, each segment between two consecutive red edges is a path (otherwise cut the blue cycle — still 3 red edges, shorter). Each segment therefore lives in a single layer as a path, so $S$ maps to a <em>path</em> of the same length in $H$. <b>Time:</b> $\mathcal{O}(4(|V|+|E|)) = \mathcal{O}(|V|+|E|)$.</p>
+  <div class="demo" data-ex="ex3" data-red="ac,bc,ad,dt,ct"></div>
+</section>
+
+<!-- ============================ EX 4 ============================ -->
+<section id="ex4" class="card ex">
+  <div class="ex-head"><span class="num">4</span><h2>Even number of blue edges</h2><span class="tag">walk · 2 layers</span></div>
+  <p class="problem">Find a shortest $s$-$t$-walk using an even number of blue edges.</p>
+  <div class="facts">
+    <div><h4>State</h4><p>Parity of blue edges so far: $0$ = even, $1$ = odd.</p></div>
+    <div><h4>Layers</h4><p>$v_0, v_1$.</p></div>
+    <div><h4>Edges of $H$</h4><p>$\{u,v\}\in E_R$: $(u_0,v_0)$, $(u_1,v_1)$ — red stays in its layer.<br>$\{u,v\}\in E_B$: $(u_0,v_1)$, $(u_1,v_0)$ — blue switches layer.</p></div>
+    <div><h4>Source → target</h4><p>$s_0 \to t_0$.</p></div>
+  </div>
+  <p><b>Note.</b> Here edges between the layers go <em>both ways</em> — parity can return to even. The layered graph is not "one-way" in general; that was only true for monotone conditions.</p>
+  <p><b>Walk:</b> a path with even blue count may not exist (a triangle $s$–$u$–$t$ with one blue edge, say). <b>Time:</b> $\mathcal{O}(|V|+|E|)$.</p>
+  <div class="demo" data-ex="ex4" data-red="sb,bc,cd,ce,et"></div>
+</section>
+
+<!-- ============================ EX 5 ============================ -->
+<section id="ex5" class="card ex">
+  <div class="ex-head"><span class="num">5</span><h2>Even blue <i>and</i> exactly three red</h2><span class="tag">walk · 2 × 4 = 8 layers</span></div>
+  <p class="problem">Find a shortest $s$-$t$-walk with an even number of blue edges and exactly three red edges.</p>
+  <div class="facts">
+    <div><h4>State</h4><p>The pair $(p, i)$: blue parity $p\in\{e,o\}$ and red count $i\in\{0,\dots,3\}$ — the <b>product</b> of the automata from Ex. 3 and Ex. 4.</p></div>
+    <div><h4>Layers</h4><p>$v^{p,i}$ — eight copies of $V$.</p></div>
+    <div><h4>Edges of $H$</h4><p>$\{u,v\}\in E_B$: $(u^{p,i}, v^{\neg p,i})$ for all $p$, $i$.<br>$\{u,v\}\in E_R$: $(u^{p,i}, v^{p,i+1})$ for $i \le 2$.</p></div>
+    <div><h4>Source → target</h4><p>$s^{e,0} \to t^{e,3}$.</p></div>
+  </div>
+  <p><b>Takeaway.</b> Conditions combine by multiplying state sets: $|Q| = 2 \cdot 4 = 8$. The proof is Ex. 3 + Ex. 4 together: each coordinate of the layer index tracks its own quantity exactly. <b>Time:</b> $\mathcal{O}(8(|V|+|E|))$.</p>
+  <div class="demo" data-ex="ex5" data-red="ac,bc,ad,dt,ct"></div>
+</section>
+
+<!-- ============================ EX 6 ============================ -->
+<section id="ex6" class="card ex">
+  <div class="ex-head"><span class="num">6</span><h2>Alternating colours</h2><span class="tag">walk · 2 layers + start</span></div>
+  <p class="problem">Find a shortest $s$-$t$-walk whose edge colours alternate (blue is always followed by red, and red by blue).</p>
+  <div class="facts">
+    <div><h4>State</h4><p>The colour of the <b>last</b> edge: $B$ or $R$ (it fixes what the next one must be).</p></div>
+    <div><h4>Layers</h4><p>$v^B$ ("last was blue, next must be red") and $v^R$.</p></div>
+    <div><h4>Edges of $H$</h4><p>$\{u,v\}\in E_B$: $(u^R, v^B)$.<br>$\{u,v\}\in E_R$: $(u^B, v^R)$.<br>Every edge of $H$ goes <em>between</em> the layers; there are none inside a layer.</p></div>
+    <div><h4>Source → target</h4><p>Target $t^\ast$ with $(t^B,t^\ast),(t^R,t^\ast)$.</p></div>
+  </div>
+  <p><b>Following the hint.</b> <em>Starting with blue:</em> pretend the previous edge was red, so start at $s^R$. <em>Any first colour:</em> add a new source $s^\ast$ with edges $(s^\ast, w^B)$ for $\{s,w\}\in E_B$ and $(s^\ast, w^R)$ for $\{s,w\}\in E_R$. This is the "start" layer in the demo, which contains only $s$. Running BFS twice (from $s^R$ and from $s^B$) and taking the minimum also works. <b>Time:</b> $\mathcal{O}(|V|+|E|)$.</p>
+  <div class="demo" data-ex="ex6" data-red="sb,bc,ce,dt,ct"></div>
+</section>
+
+<!-- ============================ EX 7 ============================ -->
+<section id="ex7" class="card ex">
+  <div class="ex-head"><span class="num">7</span><h2>At most $k$ costly vertices</h2><span class="tag">path · $k+1$ layers</span></div>
+  <p class="problem">A subset $W \subseteq V$ is costly. Find a shortest $s$-$t$-path visiting at most $k$ vertices of $W$, in time $\mathcal{O}\big((k+1)(|V|+|E|)\big)$.</p>
+  <div class="facts">
+    <div><h4>State</h4><p>Number of costly vertices visited so far: $i\in\{0,\dots,k\}$. The condition is on <b>vertices</b>, so the transition depends on the vertex we enter.</p></div>
+    <div><h4>Layers</h4><p>$v_0,\dots,v_k$.</p></div>
+    <div><h4>Edges of $H$</h4><p>For $\{u,v\}\in E$, in both directions:<br>$v\notin W$: $(u_i, v_i)$;<br>$v\in W$: $(u_i, v_{i+1})$ for $i&lt;k$.</p></div>
+    <div><h4>Source → target</h4><p>$s_0$, or $s_1$ if $s\in W$. Target $t^\ast$ from all $t_i$.</p></div>
+  </div>
+  <p><b>Path.</b> Cutting a cycle never increases the count, so a shortest valid walk is a path. <b>Time:</b> $H$ has $(k+1)|V|$ vertices and at most $2(k+1)|E|$ edges, giving $\mathcal{O}((k+1)(|V|+|E|))$ as required. Click vertices to toggle them in or out of $W$.</p>
+  <div class="demo" data-ex="ex7" data-attrs="a:W,c:W,e:W" data-k="1"></div>
+</section>
+
+<!-- ============================ EX 8 ============================ -->
+<section id="ex8" class="card ex">
+  <div class="ex-head"><span class="num">8</span><h2>Keys and doors</h2><span class="tag">walk · 2 layers</span></div>
+  <p class="problem">Vertices $K$ hold keys and vertices $D$ hold doors. A door can't be entered before at least one key has been collected. Find a shortest $s$-$t$-walk.</p>
+  <div class="facts">
+    <div><h4>State</h4><p>Do we hold a key yet? $0$ = no, $1$ = yes.</p></div>
+    <div><h4>Layers</h4><p>Layer 0: $G$ with the doors <b>locked</b> (no edge may enter $d_0$ for $d\in D$). Layer 1: all of $G$.</p></div>
+    <div><h4>Edges of $H$</h4><p>Entering $v$ from layer 0: if $v\in D$, no edge; if $v\in K$, $(u_0, v_1)$; otherwise $(u_0,v_0)$.<br>Layer 1: $(u_1,v_1)$ for every edge.</p></div>
+    <div><h4>Source → target</h4><p>$s_0$ ($s_1$ if $s\in K$) $\to t^\ast$ from $t_0, t_1$.</p></div>
+  </div>
+  <p><b>Walk:</b> you may have to walk to a key and come back the same way — that repeats vertices in $G$ but not in $H$ (the way out is in layer 0, the way back in layer 1). <b>Time:</b> $\mathcal{O}(|V|+|E|)$. Click a vertex to cycle: none → key → door.</p>
+  <div class="demo" data-ex="ex8" data-attrs="b:K,c:D,t:D"></div>
+</section>
+
+<!-- ============================ EX 9 ============================ -->
+<section id="ex9" class="card ex">
+  <div class="ex-head"><span class="num">9</span><h2>Collect all $\ell$ key types</h2><span class="tag">walk · $2^\ell$ layers</span></div>
+  <p class="problem">Keys of type $j$ lie in $\kappa_j\subseteq V$, for $j=1,\dots,\ell$. Vertex $t$ can be entered only after collecting at least one key of every type. Find a shortest such walk in time $\mathcal{O}\big(f(\ell)(|V|+|E|)\big)$.</p>
+  <div class="facts">
+    <div><h4>State</h4><p><b>Which</b> types we already have: a subset $S\subseteq\{1,\dots,\ell\}$. A count isn't enough, because two keys of the same type don't help.</p></div>
+    <div><h4>Layers</h4><p>$v_S$ for each of the $2^\ell$ subsets $S$ (store $S$ as an $\ell$-bit mask).</p></div>
+    <div><h4>Edges of $H$</h4><p>For $\{u,v\}\in E$, both directions: $(u_S, v_{S\cup \tau(v)})$, where $\tau(v)=\{j : v\in\kappa_j\}$.<br>Exception: no edge into $t_S$ unless $S = \{1,\dots,\ell\}$.</p></div>
+    <div><h4>Source → target</h4><p>$s_{\tau(s)} \to t_{\{1,\dots,\ell\}}$.</p></div>
+  </div>
+  <p><b>Time:</b> $|V(H)| = 2^\ell|V|$, $|E(H)|\le 2^{\ell+1}|E|$, so $f(\ell)=2^\ell$. The problem is FPT in $\ell$. Demo with $\ell = 2$: click a vertex to cycle none → $\kappa_1$ → $\kappa_2$ → both.</p>
+  <div class="demo" data-ex="ex9" data-attrs="b:1,d:2"></div>
+</section>
+
+<!-- ============================ EX 10 ============================ -->
+<section id="ex10" class="card ex">
+  <div class="ex-head"><span class="num">10</span><h2>Minimise the number of red edges</h2><span class="tag">path · contraction</span></div>
+  <p class="problem">Find an $s$-$t$-path that uses as few red edges as possible (its length doesn't matter).</p>
+  <p>BFS minimises the <em>number of edges</em>, so we must make blue edges free. Layers don't help here; this is a different graph modification: <b>contract</b> the blue edges.</p>
+  <div class="facts">
+    <div><h4>Vertices of $H$</h4><p>The connected components $C_1,\dots,C_m$ of the blue graph $(V,E_B)$, found by BFS on blue edges only.</p></div>
+    <div><h4>Edges of $H$</h4><p>$\{C(u), C(v)\}$ for every red edge $\{u,v\}$ with $C(u)\ne C(v)$. Red edges inside a component are useless.</p></div>
+    <div><h4>Answer</h4><p>$\operatorname{dist}_H(C(s), C(t))$ = minimum number of red edges.</p></div>
+    <div><h4>Reconstruct</h4><p>Take the red edges on the $H$-path, and inside each component join the entry and exit vertices by a blue BFS path.</p></div>
+  </div>
+  <p><b>Correctness.</b> An $s$-$t$-path in $G$ with $r$ red edges crosses $r$ red edges between components, so $\operatorname{dist}_H \le r$. Conversely, an $H$-path of length $r$ lifts to a walk in $G$ with $r$ red edges, because components are blue-connected. Shortcutting cycles only removes edges, so it becomes a path with at most $r$ red edges. <b>Time:</b> $\mathcal{O}(|V|+|E|)$. (Equivalent: 0-1 BFS with a deque, where blue edges have weight 0 and are pushed to the front.)</p>
+  <div class="demo" data-ex="ex10" data-red="sa,sb,ac,bc,ad,cd,be,dt"></div>
+</section>
+
+<!-- ============================ EX 11 ============================ -->
+<section id="ex11" class="card ex">
+  <div class="ex-head"><span class="num">11</span><h2>Three water containers</h2><span class="tag">state-space BFS</span></div>
+  <p class="problem">Containers have capacities $n_1,n_2,n_3$. Operations: fill one to the top, empty one, or pour from one into another until the source is empty or the target is full. Reach a configuration where some container holds exactly $K$ litres.</p>
+  <p>This is the layered idea at its most extreme: there is no input graph at all, and <b>the whole graph is states</b>.</p>
+  <div class="facts">
+    <div><h4>Vertices</h4><p>Configurations $(a,b,c)$ with $0\le a\le n_1$, $0\le b\le n_2$, $0\le c\le n_3$ — at most $(n_1+1)(n_2+1)(n_3+1)$ of them.</p></div>
+    <div><h4>Edges (directed!)</h4><p>One per operation: 3 fills, 3 empties, 6 pours, e.g. pouring $1\to 2$ moves $x=\min(a,\,n_2-b)$: $(a,b,c)\to(a-x,\,b+x,\,c)$. Operations aren't reversible, so $H$ is directed.</p></div>
+    <div><h4>Source → target</h4><p>$(0,0,0) \to t^\ast$, with an edge from every configuration where $a=K$, $b=K$ or $c=K$.</p></div>
+    <div><h4>Time</h4><p>$\mathcal{O}\big((n_1+1)(n_2+1)(n_3+1)\big)$ — at most 12 edges per vertex, generated on the fly. That is pseudo-polynomial (the input has size $\Theta(\log n_i)$).</p></div>
+  </div>
+  <p>BFS gives the <b>minimum number of operations</b>; if $t^\ast$ is unreachable, no solution exists.</p>
+  <div class="demo jugs" data-ex="ex11"></div>
+</section>
+</main></div><script>
+// Generic layered-graph BFS engine. G is undirected with coloured edges / typed vertices.
+// A "machine" defines the states (layers), the start state, the transition for
+// traversing edge u->v, and which states are accepting at t.
+const VERTS = {
+  s: [0.05, 0.5], a: [0.27, 0.14], b: [0.27, 0.86], c: [0.5, 0.5],
+  d: [0.73, 0.14], e: [0.73, 0.86], t: [0.95, 0.5],
+};
+const EDGES = [
+  ['s', 'a'], ['s', 'b'], ['a', 'c'], ['b', 'c'], ['a', 'd'], ['c', 'd'],
+  ['c', 'e'], ['b', 'e'], ['d', 't'], ['e', 't'], ['c', 't'],
+];
+const ekey = (u, v) => u + '-' + v;
+
+const has = (ctx, v, tag) => (ctx.attrs[v] || '').includes(tag);
+
+const MACHINES = {
+  ex1: {
+    mode: 'edge',
+    states: () => [['B', 'B · still blue'], ['R', 'R · red phase']],
+    start: () => 'B',
+    step: (q, c) => (c === 'B' ? (q === 'B' ? 'B' : null) : 'R'),
+    accept: () => true,
+  },
+  ex2: {
+    mode: 'edge',
+    states: () => [['0', '0 red used'], ['1', '1 red used']],
+    start: () => '0',
+    step: (q, c) => (c === 'B' ? q : q === '0' ? '1' : null),
+    accept: () => true,
+  },
+  ex3: {
+    mode: 'edge',
+    states: () => [0, 1, 2, 3].map((i) => [String(i), i + ' red so far']),
+    start: () => '0',
+    step: (q, c) => (c === 'B' ? q : +q < 3 ? String(+q + 1) : null),
+    accept: (q) => q === '3',
+  },
+  ex4: {
+    mode: 'edge',
+    states: () => [['0', 'even #blue'], ['1', 'odd #blue']],
+    start: () => '0',
+    step: (q, c) => (c === 'B' ? (q === '0' ? '1' : '0') : q),
+    accept: (q) => q === '0',
+  },
+  ex5: {
+    mode: 'edge',
+    states: () => {
+      const r = [];
+      for (const p of ['e', 'o']) for (let i = 0; i <= 3; i++) r.push([p + i, (p === 'e' ? 'even' : 'odd') + ' blue, ' + i + ' red']);
+      return r;
+    },
+    start: () => 'e0',
+    step: (q, c) => {
+      const p = q[0], i = +q[1];
+      if (c === 'B') return (p === 'e' ? 'o' : 'e') + i;
+      return i < 3 ? p + (i + 1) : null;
+    },
+    accept: (q) => q === 'e3',
+  },
+  ex6: {
+    mode: 'edge',
+    states: () => [['S', 'start (no edge yet)'], ['B', 'last edge blue'], ['R', 'last edge red']],
+    start: () => 'S',
+    step: (q, c) => (q === 'S' || q !== c ? c : null),
+    accept: () => true,
+  },
+  ex7: {
+    mode: 'vertex',
+    attrCycle: ['', 'W'],
+    states: (ctx) => Array.from({ length: ctx.k + 1 }, (_, i) => [String(i), i + ' costly visited']),
+    start: (ctx) => { const i = has(ctx, ctx.s, 'W') ? 1 : 0; return i <= ctx.k ? String(i) : null; },
+    step: (q, c, u, v, ctx) => { const i = +q + (has(ctx, v, 'W') ? 1 : 0); return i <= ctx.k ? String(i) : null; },
+    accept: () => true,
+  },
+  ex8: {
+    mode: 'vertex',
+    attrCycle: ['', 'K', 'D'],
+    states: () => [['0', 'no key yet'], ['1', 'holding a key']],
+    start: (ctx) => (has(ctx, ctx.s, 'K') ? '1' : '0'),
+    step: (q, c, u, v, ctx) => {
+      if (q === '0' && has(ctx, v, 'D')) return null;
+      return q === '1' || has(ctx, v, 'K') ? '1' : '0';
+    },
+    accept: () => true,
+  },
+  ex9: {
+    mode: 'vertex',
+    attrCycle: ['', '1', '2', '12'],
+    states: () => [['', '∅ collected'], ['1', '{κ₁}'], ['2', '{κ₂}'], ['12', '{κ₁, κ₂}']],
+    start: (ctx) => norm((ctx.attrs[ctx.s] || '')),
+    step: (q, c, u, v, ctx) => {
+      if (v === ctx.t && q !== '12') return null;
+      return norm(q + (ctx.attrs[v] || ''));
+    },
+    accept: (q) => q === '12',
+  },
+};
+function norm(str) { return [...new Set(str.split(''))].sort().join(''); }
+
+// Build H explicitly: nodes "v|q", directed edges with colour of the original edge.
+function buildH(m, ctx) {
+  const states = m.states(ctx).map((x) => x[0]);
+  const adj = new Map();
+  const hEdges = [];
+  for (const v in VERTS) for (const q of states) adj.set(v + '|' + q, []);
+  for (const [x, y] of EDGES) {
+    const col = ctx.colors[ekey(x, y)] || 'B';
+    for (const [u, v] of [[x, y], [y, x]]) {
+      for (const q of states) {
+        const r = m.step(q, col, u, v, ctx);
+        if (r === null || r === undefined) continue;
+        const from = u + '|' + q, to = v + '|' + r;
+        if (!adj.has(to)) continue;
+        adj.get(from).push(to);
+        hEdges.push({ from, to, col, u, v, q, r });
+      }
+    }
+  }
+  return { states, adj, hEdges };
+}
+
+// Plain BFS, recording events so the UI can replay it step by step.
+function bfs(adj, source, isTarget) {
+  const D = new Map(), P = new Map(), events = [];
+  if (source === null) return { D, P, events, found: null };
+  const Q = [source];
+  D.set(source, 0); P.set(source, null);
+  let found = isTarget(source) ? source : null;
+  events.push({ type: 'init', node: source, queue: [...Q] });
+  while (Q.length && !found) {
+    const v = Q.shift();
+    const disc = [];
+    for (const w of adj.get(v) || []) {
+      if (!D.has(w)) {
+        D.set(w, D.get(v) + 1); P.set(w, v); Q.push(w); disc.push(w);
+        if (isTarget(w) && !found) found = w;
+      }
+    }
+    events.push({ type: 'expand', node: v, disc, queue: [...Q] });
+  }
+  return { D, P, events, found };
+}
+
+function solve(exId, ctx) {
+  const m = MACHINES[exId];
+  const H = buildH(m, ctx);
+  const q0 = m.start(ctx);
+  const src = q0 === null ? null : ctx.s + '|' + q0;
+  const isT = (n) => { const [v, q] = n.split('|'); return v === ctx.t && m.accept(q, ctx); };
+  const res = bfs(H.adj, src, isT);
+  let path = [];
+  if (res.found) { let x = res.found; while (x !== null) { path.push(x); x = res.P.get(x); } path.reverse(); }
+  return { H, src, ...res, path };
+}
+
+// ---------- UI for the layered-graph demos (uses engine.js) ----------
+const NS = 'http://www.w3.org/2000/svg';
+const COL = { B: '#2563eb', R: '#dc2626', N: '#64748b' };
+function el(tag, attrs = {}, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function h(tag, attrs = {}, html = '') {
+  const e = document.createElement(tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  e.innerHTML = html;
+  return e;
+}
+function defs(svg) {
+  const d = el('defs', {}, svg);
+  for (const [id, c] of [['B', COL.B], ['R', COL.R], ['N', COL.N], ['P', '#111827']]) {
+    const m = el('marker', { id: 'ar' + id + svg.dataset.uid, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' }, d);
+    el('path', { d: 'M0,0 L10,5 L0,10 z', fill: c }, m);
+  }
+}
+let UID = 0;
+function newSvg(parent, w, hgt) {
+  const svg = el('svg', { viewBox: `0 0 ${w} ${hgt}`, class: 'gsvg' }, parent);
+  svg.dataset.uid = ++UID;
+  defs(svg);
+  return svg;
+}
+function shorten(x1, y1, x2, y2, r1, r2) {
+  const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy) || 1;
+  return [x1 + (dx * r1) / L, y1 + (dy * r1) / L, x2 - (dx * r2) / L, y2 - (dy * r2) / L];
+}
+
+// state labels as subscripts
+function subLabel(ex, q) {
+  if (ex === 'ex5') return q[0] + ',' + q[1];
+  if (ex === 'ex9') return q === '' ? '∅' : '{' + q.split('').join(',') + '}';
+  return q;
+}
+function nodeHTML(ex, n) {
+  const [v, q] = n.split('|');
+  const sup = ['ex1', 'ex6', 'ex5'].includes(ex);
+  return `<span class="hn">${v}${sup ? `<sup>${subLabel(ex, q)}</sup>` : `<sub>${subLabel(ex, q)}</sub>`}</span>`;
+}
+
+const ATTR_LABEL = { W: 'W', K: 'key', D: 'door', 1: 'κ₁', 2: 'κ₂', 12: 'κ₁κ₂' };
+
+function parseDemo(div) {
+  const colors = {};
+  const red = (div.dataset.red || '').split(',').filter(Boolean);
+  for (const [u, v] of EDGES) colors[ekey(u, v)] = red.includes(u + v) || red.includes(v + u) ? 'R' : 'B';
+  const attrs = {};
+  for (const p of (div.dataset.attrs || '').split(',').filter(Boolean)) { const [v, a] = p.split(':'); attrs[v] = a; }
+  return { colors, attrs, s: 's', t: 't', k: +(div.dataset.k || 1) };
+}
+
+// ---------------- layered demos (ex1–ex9) ----------------
+function LayeredDemo(div) {
+  const ex = div.dataset.ex, m = MACHINES[ex];
+  const ctx = parseDemo(div);
+  let sol, step = -1, timer = null, reach;
+
+  div.innerHTML = '';
+  const bar = h('div', { class: 'bar' });
+  const bReset = h('button', {}, '⟲ Reset'), bStep = h('button', {}, 'Step ›'), bRun = h('button', { class: 'primary' }, '▶ Run');
+  bar.append(bReset, bStep, bRun);
+  if (ex === 'ex7') {
+    const lab = h('label', { class: 'kin' }, 'k = ');
+    const inp = h('input', { type: 'number', min: 0, max: 4, value: ctx.k });
+    inp.oninput = () => { ctx.k = Math.max(0, Math.min(4, +inp.value || 0)); recompute(); };
+    lab.appendChild(inp); bar.appendChild(lab);
+  }
+  bar.appendChild(h('span', { class: 'hint' }, m.mode === 'edge' ? 'click an edge in G to recolour it' : 'click a vertex in G to change its type'));
+  div.appendChild(bar);
+
+  const wrap = h('div', { class: 'panes' });
+  const left = h('div', { class: 'pane' }, '<div class="pane-t">Input graph $G$</div>');
+  const right = h('div', { class: 'pane' }, '<div class="pane-t">Layered graph $H$ &nbsp;<span class="muted">(BFS runs here)</span></div>');
+  wrap.append(left, right); div.appendChild(wrap);
+  const status = h('div', { class: 'status' });
+  const answer = h('div', { class: 'answer' });
+  left.appendChild(answer);
+  div.appendChild(status);
+
+  const GW = 560, GH = 250, GP = 34;
+  const gpos = (v) => [GP + VERTS[v][0] * (GW - 2 * GP), GP + VERTS[v][1] * (GH - 2 * GP)];
+  const gsvg = newSvg(left, GW, GH);
+  left.insertBefore(gsvg, answer);
+
+  const states = () => m.states(ctx);
+  let hsvg = null;
+
+  function recompute() {
+    stop();
+    sol = solve(ex, ctx);
+    // full reachability (no early stop) to dim unreachable copies
+    reach = new Set();
+    if (sol.src) { const Q = [sol.src]; reach.add(sol.src); while (Q.length) { const x = Q.shift(); for (const y of sol.H.adj.get(x)) if (!reach.has(y)) { reach.add(y); Q.push(y); } } }
+    step = -1;
+    draw();
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; bRun.textContent = '▶ Run'; } }
+
+  function snapshot() {
+    const D = new Map(), closed = new Set(); let cur = null, ev = null;
+    for (let i = 0; i <= step && i < sol.events.length; i++) {
+      ev = sol.events[i];
+      if (ev.type === 'init') D.set(ev.node, 0);
+      else { closed.add(ev.node); cur = ev.node; for (const w of ev.disc) D.set(w, sol.D.get(w)); }
+    }
+    return { D, closed, cur, ev };
+  }
+  const done = () => step >= sol.events.length - 1;
+
+  function drawG(snap) {
+    gsvg.querySelectorAll(':scope > :not(defs)').forEach((x) => x.remove());
+    // projected path usage
+    const use = {};
+    if (done() && sol.found) {
+      for (let i = 1; i < sol.path.length; i++) {
+        const u = sol.path[i - 1].split('|')[0], v = sol.path[i].split('|')[0];
+        const k = EDGES.find(([x, y]) => (x === u && y === v) || (x === v && y === u)).join('-');
+        (use[k] = use[k] || []).push(i);
+      }
+    }
+    for (const [u, v] of EDGES) {
+      const k = ekey(u, v), [x1, y1] = gpos(u), [x2, y2] = gpos(v);
+      const c = m.mode === 'edge' ? COL[ctx.colors[k]] : COL.N;
+      if (use[k]) el('line', { x1, y1, x2, y2, stroke: '#facc15', 'stroke-width': 13, 'stroke-linecap': 'round', opacity: 0.75 }, gsvg);
+      el('line', { x1, y1, x2, y2, stroke: c, 'stroke-width': 3.5, 'stroke-linecap': 'round' }, gsvg);
+      if (use[k]) {
+        const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+        el('rect', { x: mx - 4 - 6 * use[k].join(',').length / 2, y: my - 9, width: 8 + 6 * use[k].join(',').length, height: 16, rx: 8, fill: '#111827' }, gsvg);
+        const tx = el('text', { x: mx, y: my + 4, class: 'stepno' }, gsvg); tx.textContent = use[k].join(',');
+      }
+      if (m.mode === 'edge') {
+        const hit = el('line', { x1, y1, x2, y2, stroke: 'transparent', 'stroke-width': 16, class: 'hit' }, gsvg);
+        hit.onclick = () => { ctx.colors[k] = ctx.colors[k] === 'B' ? 'R' : 'B'; recompute(); };
+      }
+    }
+    for (const v in VERTS) {
+      const [x, y] = gpos(v), a = ctx.attrs[v] || '';
+      const g = el('g', { class: m.mode === 'vertex' ? 'vclick' : '' }, gsvg);
+      el('circle', { cx: x, cy: y, r: 16, fill: a ? '#fef3c7' : '#fff', stroke: v === 's' || v === 't' ? '#111827' : '#94a3b8', 'stroke-width': v === 's' || v === 't' ? 2.5 : 1.5 }, g);
+      const t = el('text', { x, y: y + 5, class: 'vlab' }, g); t.textContent = v;
+      if (a) {
+        const lab = ATTR_LABEL[a] || a, w = 10 + lab.length * 7;
+        el('rect', { x: x - w / 2, y: y - 34, width: w, height: 15, rx: 7, fill: a === 'D' ? '#7c2d12' : a === 'W' ? '#b45309' : '#047857' }, g);
+        const bt = el('text', { x, y: y - 23, class: 'badge' }, g); bt.textContent = lab;
+      }
+      if (m.mode === 'vertex') g.onclick = () => {
+        const cyc = m.attrCycle, i = cyc.indexOf(a);
+        ctx.attrs[v] = cyc[(i + 1) % cyc.length]; recompute();
+      };
+    }
+  }
+
+  function drawH(snap) {
+    if (hsvg) hsvg.remove();
+    const st = states(), n = st.length, cols = n > 4 ? 2 : 1, rows = Math.ceil(n / cols);
+    const W = 560, bw = W / cols, bh = cols === 2 ? 128 : n <= 2 ? 160 : 132, Hh = rows * bh + 6;
+    hsvg = newSvg(right, W, Hh);
+    const uid = hsvg.dataset.uid;
+    const box = {};
+    st.forEach(([q, lab], i) => {
+      const c = cols === 2 ? Math.floor(i / rows) : 0, r = cols === 2 ? i % rows : i;
+      box[q] = { x: c * bw, y: r * bh };
+      el('rect', { x: box[q].x + 3, y: box[q].y + 3, width: bw - 6, height: bh - 6, rx: 10, class: 'layer' + (m.accept(q, ctx) ? ' acc' : '') }, hsvg);
+      const tt = el('text', { x: box[q].x + 12, y: box[q].y + 18, class: 'ltitle' }, hsvg);
+      tt.textContent = 'layer ' + subLabel(ex, q) + ' — ' + lab + (m.accept(q, ctx) ? ' ✓' : '');
+    });
+    const pad = 22;
+    const hp = (node) => {
+      const [v, q] = node.split('|'), b = box[q];
+      return [b.x + pad + VERTS[v][0] * (bw - 2 * pad), b.y + 30 + VERTS[v][1] * (bh - 46)];
+    };
+    const R = cols === 2 ? 8 : 9.5;
+    // edges
+    const set = new Set(sol.H.hEdges.map((e) => e.from + '>' + e.to));
+    const drawn = new Set();
+    for (const e of sol.H.hEdges) {
+      const back = e.to + '>' + e.from, key = [e.from, e.to].sort().join('~');
+      if (drawn.has(key)) continue;
+      const both = set.has(back);
+      if (both) drawn.add(key);
+      const [x1, y1] = hp(e.from), [x2, y2] = hp(e.to);
+      const c = m.mode === 'edge' ? e.col : 'N';
+      const same = e.from.split('|')[1] === e.to.split('|')[1];
+      const dim = !(reach.has(e.from) && reach.has(e.to));
+      const [a1, b1, a2, b2] = shorten(x1, y1, x2, y2, R + 1, R + 2);
+      el('line', { x1: a1, y1: b1, x2: a2, y2: b2, stroke: COL[c], 'stroke-width': same ? 1.6 : 1.2, opacity: dim ? 0.12 : same ? 0.55 : 0.4, 'stroke-dasharray': same ? '' : '4 3', 'marker-end': both ? '' : `url(#ar${c}${uid})`, 'marker-start': both && !same ? `url(#ar${c}${uid})` : '' }, hsvg);
+    }
+    // path overlay
+    if (done() && sol.found) {
+      for (let i = 1; i < sol.path.length; i++) {
+        const [x1, y1] = hp(sol.path[i - 1]), [x2, y2] = hp(sol.path[i]);
+        const [a1, b1, a2, b2] = shorten(x1, y1, x2, y2, R + 1, R + 2);
+        el('line', { x1: a1, y1: b1, x2: a2, y2: b2, stroke: '#facc15', 'stroke-width': 8, 'stroke-linecap': 'round', opacity: 0.8 }, hsvg);
+        el('line', { x1: a1, y1: b1, x2: a2, y2: b2, stroke: '#111827', 'stroke-width': 2.2, 'marker-end': `url(#arP${uid})` }, hsvg);
+      }
+    }
+    // nodes
+    for (const node of sol.H.adj.keys()) {
+      const [x, y] = hp(node), [v, q] = node.split('|');
+      const dim = !reach.has(node);
+      let fill = '#fff', stroke = '#94a3b8';
+      if (snap.closed.has(node)) { fill = '#c7d2fe'; stroke = '#4f46e5'; }
+      else if (snap.D.has(node)) { fill = '#fde68a'; stroke = '#d97706'; }
+      if (node === snap.cur) stroke = '#111827';
+      const g = el('g', { opacity: dim ? 0.25 : 1 }, hsvg);
+      if (v === ctx.t && m.accept(q, ctx)) el('circle', { cx: x, cy: y, r: R + 3.5, fill: 'none', stroke: '#16a34a', 'stroke-width': 2 }, g);
+      el('circle', { cx: x, cy: y, r: R, fill, stroke, 'stroke-width': node === snap.cur || node === sol.src ? 2.4 : 1.3 }, g);
+      const t = el('text', { x, y: y + 3.5, class: 'hlab' }, g); t.textContent = v;
+      if (snap.D.has(node)) { const d = el('text', { x: x + R + 2, y: y - R + 1, class: 'dlab' }, g); d.textContent = snap.D.get(node); }
+    }
+  }
+
+  function draw() {
+    const snap = snapshot();
+    drawG(snap); drawH(snap);
+    // status
+    if (!sol.src) status.innerHTML = '<b>No source</b> — $s$ itself already violates the condition.';
+    else if (step < 0) status.innerHTML = `Ready. BFS will start at ${nodeHTML(ex, sol.src)}. $H$ has ${sol.H.adj.size} vertices and ${sol.H.hEdges.length} directed edges (faded copies are unreachable from the source).`;
+    else {
+      const ev = snap.ev;
+      const q = ev.queue.map((x) => nodeHTML(ex, x)).join(' ');
+      status.innerHTML = (ev.type === 'init' ? `Enqueue source ${nodeHTML(ex, ev.node)}.` :
+        `Dequeue ${nodeHTML(ex, ev.node)} (dist ${sol.D.get(ev.node)}) → discovered ${ev.disc.length ? ev.disc.map((x) => nodeHTML(ex, x)).join(' ') : 'nothing new'}.`) +
+        `<div class="queue">Queue: ${q || '<i>empty</i>'}</div>`;
+    }
+    // answer
+    if (!done() || !sol.src) { answer.innerHTML = '<span class="muted">Run BFS to see the answer projected onto $G$.</span>'; }
+    else if (!sol.found) answer.innerHTML = '<b class="bad">No valid walk</b>: no accepting copy of $t$ is reachable in $H$.';
+    else {
+      const seq = [];
+      const vs = sol.path.map((x) => x.split('|')[0]);
+      for (let i = 0; i < sol.path.length; i++) {
+        if (i) {
+          const u = vs[i - 1], v = vs[i];
+          const k = EDGES.find(([x, y]) => (x === u && y === v) || (x === v && y === u)).join('-');
+          const c = m.mode === 'edge' ? ctx.colors[k] : 'N';
+          seq.push(`<span class="arr" style="color:${COL[c]}">→</span>`);
+        }
+        seq.push(nodeHTML(ex, sol.path[i]));
+      }
+      const rep = vs.length !== new Set(vs).size;
+      answer.innerHTML = `<b class="good">Length ${sol.path.length - 1}</b> ${rep ? '<span class="pill warn">walk (repeats a vertex of G)</span>' : '<span class="pill ok">a path in G</span>'}<div class="seq">${seq.join(' ')}</div>`;
+    }
+    typeset(div);
+  }
+
+  bReset.onclick = () => { stop(); step = -1; draw(); };
+  bStep.onclick = () => { stop(); if (!done()) { step++; draw(); } };
+  bRun.onclick = () => {
+    if (timer) return stop();
+    if (done()) step = -1;
+    bRun.textContent = '❚❚ Pause';
+    timer = setInterval(() => { if (done()) return stop(); step++; draw(); }, 420);
+  };
+  recompute();
+}
+
+// ---------------- ex10: contraction ----------------
+function ContractDemo(div) {
+  const ctx = parseDemo(div);
+  div.innerHTML = '';
+  const bar = h('div', { class: 'bar' });
+  const bReset = h('button', {}, '⟲ Reset'), bStep = h('button', {}, 'Step ›'), bRun = h('button', { class: 'primary' }, '▶ Run');
+  bar.append(bReset, bStep, bRun, h('span', { class: 'hint' }, 'click an edge in G to recolour it'));
+  div.appendChild(bar);
+  const wrap = h('div', { class: 'panes' });
+  const left = h('div', { class: 'pane' }, '<div class="pane-t">$G$ — vertices shaded by blue component</div>');
+  const right = h('div', { class: 'pane' }, '<div class="pane-t">Contracted graph $H$ (red edges only)</div>');
+  wrap.append(left, right); div.appendChild(wrap);
+  const status = h('div', { class: 'status' }); div.appendChild(status);
+  const answer = h('div', { class: 'answer' }); left.appendChild(answer);
+  const PAL = ['#dbeafe', '#dcfce7', '#fae8ff', '#ffedd5', '#e0f2fe', '#fef9c3', '#ede9fe'];
+  const GW = 560, GH = 250, GP = 34;
+  const gpos = (v) => [GP + VERTS[v][0] * (GW - 2 * GP), GP + VERTS[v][1] * (GH - 2 * GP)];
+  const gsvg = newSvg(left, GW, GH); left.insertBefore(gsvg, answer);
+  const hsvg = newSvg(right, GW, GH);
+  let comp, comps, hadj, res, path, step = -1, timer = null;
+
+  function compute() {
+    comp = {}; comps = [];
+    for (const v in VERTS) {
+      if (comp[v] !== undefined) continue;
+      const id = comps.length, mem = [v]; comp[v] = id; const Q = [v];
+      while (Q.length) { const x = Q.shift(); for (const [a, b] of EDGES) { if (ctx.colors[ekey(a, b)] !== 'B') continue; const y = a === x ? b : b === x ? a : null; if (y && comp[y] === undefined) { comp[y] = id; mem.push(y); Q.push(y); } } }
+      comps.push(mem);
+    }
+    hadj = new Map(comps.map((_, i) => ['C' + i, []]));
+    const via = {};
+    for (const [a, b] of EDGES) {
+      if (ctx.colors[ekey(a, b)] !== 'R' || comp[a] === comp[b]) continue;
+      hadj.get('C' + comp[a]).push('C' + comp[b]); hadj.get('C' + comp[b]).push('C' + comp[a]);
+      via['C' + comp[a] + '>C' + comp[b]] = via['C' + comp[a] + '>C' + comp[b]] || [a, b];
+      via['C' + comp[b] + '>C' + comp[a]] = via['C' + comp[b] + '>C' + comp[a]] || [b, a];
+    }
+    const src = 'C' + comp.s, tgt = 'C' + comp.t;
+    res = bfs(hadj, src, (n) => n === tgt);
+    // reconstruct G path
+    path = [];
+    if (res.found) {
+      const cp = []; let x = res.found; while (x !== null) { cp.push(x); x = res.P.get(x); } cp.reverse();
+      let cur = 's';
+      const bluePath = (a, b) => { // BFS on blue edges
+        const P = { [a]: null }, Q = [a];
+        while (Q.length) { const x = Q.shift(); if (x === b) break; for (const [p, q] of EDGES) { if (ctx.colors[ekey(p, q)] !== 'B') continue; const y = p === x ? q : q === x ? p : null; if (y && !(y in P)) { P[y] = x; Q.push(y); } } }
+        const r = []; let z = b; while (z !== null) { r.push(z); z = P[z]; } return r.reverse();
+      };
+      path = ['s'];
+      for (let i = 1; i < cp.length; i++) {
+        const [u, v] = via[cp[i - 1] + '>' + cp[i]];
+        path.push(...bluePath(cur, u).slice(1), v); cur = v;
+      }
+      path.push(...bluePath(cur, 't').slice(1));
+    }
+    step = -1; draw();
+  }
+  const done = () => step >= res.events.length - 1;
+  function snapshot() { const D = new Map(), closed = new Set(); let ev = null; for (let i = 0; i <= step; i++) { ev = res.events[i]; if (ev.type === 'init') D.set(ev.node, 0); else { closed.add(ev.node); ev.disc.forEach((w) => D.set(w, res.D.get(w))); } } return { D, closed, ev }; }
+  function cpos(i) { const m = comps[i]; return [m.reduce((s, v) => s + gpos(v)[0], 0) / m.length, m.reduce((s, v) => s + gpos(v)[1], 0) / m.length]; }
+
+  function draw() {
+    const snap = snapshot();
+    gsvg.querySelectorAll(':scope > :not(defs)').forEach((x) => x.remove());
+    hsvg.querySelectorAll(':scope > :not(defs)').forEach((x) => x.remove());
+    const pe = new Set();
+    if (done()) for (let i = 1; i < path.length; i++) pe.add([path[i - 1], path[i]].sort().join('-'));
+    for (const [u, v] of EDGES) {
+      const k = ekey(u, v), [x1, y1] = gpos(u), [x2, y2] = gpos(v);
+      if (pe.has([u, v].sort().join('-'))) el('line', { x1, y1, x2, y2, stroke: '#facc15', 'stroke-width': 13, 'stroke-linecap': 'round', opacity: 0.75 }, gsvg);
+      el('line', { x1, y1, x2, y2, stroke: COL[ctx.colors[k]], 'stroke-width': 3.5 }, gsvg);
+      const hit = el('line', { x1, y1, x2, y2, stroke: 'transparent', 'stroke-width': 16, class: 'hit' }, gsvg);
+      hit.onclick = () => { stop(); ctx.colors[k] = ctx.colors[k] === 'B' ? 'R' : 'B'; compute(); };
+    }
+    for (const v in VERTS) {
+      const [x, y] = gpos(v);
+      el('circle', { cx: x, cy: y, r: 16, fill: PAL[comp[v] % PAL.length], stroke: v === 's' || v === 't' ? '#111827' : '#94a3b8', 'stroke-width': v === 's' || v === 't' ? 2.5 : 1.5 }, gsvg);
+      const t = el('text', { x, y: y + 5, class: 'vlab' }, gsvg); t.textContent = v;
+    }
+    // H
+    const drawn = new Set();
+    for (const [a, list] of hadj) for (const b of list) {
+      const key = [a, b].sort().join('~'); if (drawn.has(key)) continue; drawn.add(key);
+      const [x1, y1] = cpos(+a.slice(1)), [x2, y2] = cpos(+b.slice(1));
+      el('line', { x1, y1, x2, y2, stroke: COL.R, 'stroke-width': 2.5, opacity: 0.7 }, hsvg);
+    }
+    if (done() && res.found) { let x = res.found; while (res.P.get(x) !== null) { const p = res.P.get(x); const [x1, y1] = cpos(+p.slice(1)), [x2, y2] = cpos(+x.slice(1)); el('line', { x1, y1, x2, y2, stroke: '#facc15', 'stroke-width': 10, opacity: 0.7, 'stroke-linecap': 'round' }, hsvg); x = p; } }
+    comps.forEach((mem, i) => {
+      const [x, y] = cpos(i), n = 'C' + i;
+      let stroke = '#94a3b8'; if (snap.closed.has(n)) stroke = '#4f46e5'; else if (snap.D.has(n)) stroke = '#d97706';
+      const r = 18 + 4 * mem.length;
+      el('circle', { cx: x, cy: y, r, fill: PAL[i % PAL.length], stroke, 'stroke-width': snap.D.has(n) ? 3 : 1.5, opacity: 0.95 }, hsvg);
+      const t = el('text', { x, y: y + 4, class: 'vlab small' }, hsvg); t.textContent = '{' + mem.join(',') + '}';
+      if (snap.D.has(n)) { const d = el('text', { x: x + r - 2, y: y - r + 4, class: 'dlab big' }, hsvg); d.textContent = snap.D.get(n); }
+    });
+    if (step < 0) status.innerHTML = `Blue components: ${comps.map((m) => '{' + m.join(',') + '}').join(', ')}. BFS starts at the component of $s$.`;
+    else { const ev = snap.ev; status.innerHTML = ev.type === 'init' ? `Enqueue {${comps[+ev.node.slice(1)].join(',')}}.` : `Dequeue {${comps[+ev.node.slice(1)].join(',')}} → discovered ${ev.disc.map((n) => '{' + comps[+n.slice(1)].join(',') + '}').join(' ') || 'nothing new'}.`; }
+    if (!done()) answer.innerHTML = '<span class="muted">Run BFS to see the path with fewest red edges.</span>';
+    else if (!res.found) answer.innerHTML = '<b class="bad">t unreachable</b>';
+    else {
+      let reds = 0; const seq = [path[0]];
+      for (let i = 1; i < path.length; i++) { const k = EDGES.find(([x, y]) => (x === path[i - 1] && y === path[i]) || (y === path[i - 1] && x === path[i])).join('-'); if (ctx.colors[k] === 'R') reds++; seq.push(`<span class="arr" style="color:${COL[ctx.colors[k]]}">→</span>`, path[i]); }
+      answer.innerHTML = `<b class="good">${reds} red edge${reds === 1 ? '' : 's'}</b> (= dist in $H$) <span class="pill ok">length ${path.length - 1}</span><div class="seq">${seq.join(' ')}</div>`;
+    }
+    typeset(div);
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; bRun.textContent = '▶ Run'; } }
+  bReset.onclick = () => { stop(); step = -1; draw(); };
+  bStep.onclick = () => { stop(); if (!done()) { step++; draw(); } };
+  bRun.onclick = () => { if (timer) return stop(); if (done()) step = -1; bRun.textContent = '❚❚ Pause'; timer = setInterval(() => { if (done()) return stop(); step++; draw(); }, 500); };
+  compute();
+}
+
+// ---------------- ex11: water jugs ----------------
+function JugsDemo(div) {
+  div.innerHTML = `<div class="bar jugbar">
+    <label>$n_1$ <input type="number" id="j1" value="3" min="0" max="60"></label>
+    <label>$n_2$ <input type="number" id="j2" value="5" min="0" max="60"></label>
+    <label>$n_3$ <input type="number" id="j3" value="8" min="0" max="60"></label>
+    <label>$K$ <input type="number" id="jk" value="4" min="0" max="60"></label>
+    <button class="primary">Solve with BFS</button></div><div class="jugout"></div>`;
+  const out = div.querySelector('.jugout');
+  const run = () => {
+    const cap = ['#j1', '#j2', '#j3'].map((s) => Math.max(0, Math.min(60, +div.querySelector(s).value || 0)));
+    const K = +div.querySelector('#jk').value || 0;
+    const key = (s) => s.join(',');
+    const start = [0, 0, 0], P = new Map([[key(start), null]]), Q = [start];
+    const name = ['1', '2', '3'];
+    let found = null, explored = 0;
+    const isT = (s) => s.includes(K);
+    if (isT(start)) found = start;
+    while (Q.length && !found) {
+      const s = Q.shift(); explored++;
+      const moves = [];
+      for (let i = 0; i < 3; i++) {
+        if (s[i] < cap[i]) { const n = [...s]; n[i] = cap[i]; moves.push([n, `fill ${name[i]}`]); }
+        if (s[i] > 0) { const n = [...s]; n[i] = 0; moves.push([n, `empty ${name[i]}`]); }
+        for (let j = 0; j < 3; j++) if (i !== j) { const x = Math.min(s[i], cap[j] - s[j]); if (x > 0) { const n = [...s]; n[i] -= x; n[j] += x; moves.push([n, `pour ${name[i]}→${name[j]}`]); } }
+      }
+      for (const [n, op] of moves) { const k = key(n); if (!P.has(k)) { P.set(k, [key(s), op]); Q.push(n); if (isT(n)) { found = n; break; } } }
+    }
+    const total = (cap[0] + 1) * (cap[1] + 1) * (cap[2] + 1);
+    if (!found) { out.innerHTML = `<div class="answer"><b class="bad">Impossible.</b> BFS explored all ${P.size} reachable configurations (of ${total} possible) and none contains ${K} L.</div>`; return; }
+    const seq = []; let k = key(found);
+    while (P.get(k)) { const [p, op] = P.get(k); seq.push([op, k]); k = p; }
+    seq.reverse();
+    const bars = (st) => st.split(',').map((v, i) => `<span class="jug"><span class="fillbar" style="height:${cap[i] ? (100 * v) / cap[i] : 0}%"></span><b>${v}</b></span>`).join('');
+    out.innerHTML = `<div class="answer"><b class="good">${seq.length} operation${seq.length === 1 ? '' : 's'}</b> <span class="muted">— BFS discovered ${P.size} of ${total} configurations</span></div>
+      <table class="jt"><tr><th>#</th><th>operation</th><th>state $(a,b,c)$</th><th></th></tr>
+      <tr><td>0</td><td><i>start</i></td><td>(0,0,0)</td><td>${bars('0,0,0')}</td></tr>
+      ${seq.map(([op, st], i) => `<tr><td>${i + 1}</td><td>${op}</td><td>(${st})</td><td>${bars(st)}</td></tr>`).join('')}</table>`;
+    typeset(out);
+  };
+  div.querySelector('button').onclick = run;
+  div.querySelectorAll('input').forEach((i) => i.addEventListener('keydown', (e) => e.key === 'Enter' && run()));
+  run();
+}
+
+function typeset(node) {
+  if (window.renderMathInElement) renderMathInElement(node, { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }], throwOnError: false });
+}
+
+function initBfsModifications(root = document) {
+  root.querySelectorAll('.demo').forEach((d) => {
+    if (d.dataset.ex === 'ex10') ContractDemo(d);
+    else if (d.dataset.ex === 'ex11') JugsDemo(d);
+    else LayeredDemo(d);
+  });
+  typeset(root.body || root);
+}
+window.addEventListener('load', () => {
+  initBfsModifications(document);
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-40% 0px -55% 0px' });
+  document.querySelectorAll('main section').forEach((s) => io.observe(s));
+});
+</script></body></html>
